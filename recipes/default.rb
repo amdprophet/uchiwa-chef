@@ -20,10 +20,15 @@ include_recipe "uchiwa::#{node['uchiwa']['install_method']}"
 
 # Generate config file
 settings = {}
+
 node['uchiwa']['settings'].each do |k, v|
   settings[k] = v
 end
-config = { 'uchiwa' => settings, 'sensu' => node['uchiwa']['api'] }
+
+config = {
+  "uchiwa" => settings,
+  "sensu" => node["uchiwa"]["datacenters"]
+}
 
 template "#{node['uchiwa']['sensu_homedir']}/uchiwa.json" do
   user node['uchiwa']['owner']
