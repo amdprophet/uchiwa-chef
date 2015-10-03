@@ -1,4 +1,5 @@
 actions :create
+default_action :create
 
 attribute :name, :kind_of => String
 attribute :host, :kind_of => String, :default => "127.0.0.1"
