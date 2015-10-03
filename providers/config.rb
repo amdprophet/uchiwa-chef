@@ -1,7 +1,10 @@
 action :create do
+  datacenters = node.run_state[:uchiwa_datacenters] || []
+  datacenters += node["uchiwa"]["datacenters"]
+
   config = {
     "uchiwa" => node["uchiwa"]["settings"],
-    "sensu" => node["uchiwa"]["datacenters"]
+    "sensu" => datacenters
   }
 
   template "#{node['uchiwa']['sensu_homedir']}/uchiwa.json" do

@@ -10,5 +10,6 @@ action :create do
   datacenter[:user] = new_resource.user unless new_resource.user.nil?
   datacenter[:pass] = new_resource.pass unless new_resource.pass.nil?
 
-  node.default["uchiwa"]["datacenters"] << datacenter
+  node.run_state[:uchiwa_datacenters] ||= []
+  node.run_state[:uchiwa_datacenters] << datacenter
 end
